@@ -45,8 +45,8 @@ def push(res,name='NONE')->object:
 def report(Cookie :str,Reason :str,reason_detail :int,complaint_reason_url :str,id_ :int)->object:
     """
     举报作品
-    :param cookie:COOKIE
-    :param reason: 理由
+    :param Cookie:COOKIE
+    :param Reason: 理由
     :param reason_detail: 理由类型 1 2 3等
     :param complaint_reason_url: （被抄袭）源地址
     :param id_: 作品ID
