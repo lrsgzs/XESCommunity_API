@@ -1,3 +1,9 @@
+<!-- html部分-开始 -->
+<div>
+    <link rel="shortcut icon" href="页面ico图标文件路径">
+</div>
+<!-- html部分-结束 -->
+
 # XESCommunity_API - 学而思编程社区模块化API
 
 ## 函数
