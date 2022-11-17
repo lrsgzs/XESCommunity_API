@@ -24,7 +24,7 @@
 save("作品名", 'print(\"hhh\")', ..., {...})
 ```
 
-### def publish(res:str, cookies: str, headers: dict = {},description='',thumbnail="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png", name='NONE',tags='') -> object:
+### def publish(res:str, cookies: str, headers: dict = {}, description='', thumbnail="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png", name='NONE', tags='') -> object:
 #### 作用
 ##### 发布作品
 #### 参数
@@ -53,7 +53,7 @@ publish(res.save, ...)
 publish(save(...), '作品名', ..., {...}, '作品简介', '封面网址', 'xxx xxx xxx')
 ```
 
-### def raw_publish(ID, cookies: str, headers: dict = {},thumbnail="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png",description='', name='NONE',tags='') -> object:
+### def raw_publish(ID, cookies: str, headers: dict = {}, thumbnail="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png", description='', name='NONE', tags='') -> object:
 #### 作用
 ##### 发布作品（推荐使用）
 #### 参数

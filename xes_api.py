@@ -26,20 +26,20 @@ def save(name :str, xml, cookies: str, headers={}, type_='webpy', projectid=3) -
     :return: 返回请求变量
     """
     if headers == {}:
-        headers = {'Cookie': cookies,
+        headers = {'Cookie': cookies, 
                    'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33"
                    }
 
     base = "https://code.xueersi.com/api/compilers/save"
-    data = {"name": name, "xml": xml, "type": type_, "lang": type_, "id": '',
-            "original_id": 3, "version": "webpy", "args": [], "planid": 'null', "problemid": '', "projectid": projectid,
-            "code_complete": 1, "removed": 0, "user_id": 8510061,
+    data = {"name": name, "xml": xml, "type": type_, "lang": type_, "id": '', 
+            "original_id": 3, "version": "webpy", "args": [], "planid": 'null', "problemid": '', "projectid": projectid, 
+            "code_complete": 1, "removed": 0, "user_id": 8510061, 
             "assets": {"assets": [], "cdns": ["https://livefile.xesimg.com"], "hide_filelist": False}}
     res = requests.post(base, data=data, headers=headers)
     return res
 
 
-def publish(res:str, cookies: str, headers: dict = {},description='',thumbnail="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png", name='NONE',tags='') -> object:
+def publish(res:str, cookies: str, headers: dict = {}, description='', thumbnail="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png", name='NONE', tags='') -> object:
     """
     发布作品
     res: 请求变量
@@ -51,7 +51,7 @@ def publish(res:str, cookies: str, headers: dict = {},description='',thumbnail="
     res就是save的请求变量（如果你直接填入的话会报错）
     正确示例：
     res=save(...)
-    publish(res.save,...)
+    publish(res.save, ...)
 
     cookies就是用户凭据，不作说明
     description就是作品简介
@@ -62,7 +62,7 @@ def publish(res:str, cookies: str, headers: dict = {},description='',thumbnail="
     :return: 请求变量
     """
     if headers == {}:
-        headers = {'Cookie': cookies,
+        headers = {'Cookie': cookies, 
                    'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33"
                    }
 
@@ -70,13 +70,13 @@ def publish(res:str, cookies: str, headers: dict = {},description='',thumbnail="
     ID = res['data']['id']
     # print(ID)
     base = "https://code.xueersi.com/api/python/%s/publish"  # 作品id
-    data = {"projectId": str(ID), "name": name, "description": description, "created_source": "original",
-            "hidden_code": 2, "thumbnail": thumbnail,
+    data = {"projectId": str(ID), "name": name, "description": description, "created_source": "original", 
+            "hidden_code": 2, "thumbnail": thumbnail, 
             "tags": tags}
     res = requests.post(base % ID, headers=headers, data=data)
     return res
 
-def raw_publish(ID, cookies: str, headers: dict = {},thumbnail="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png",description='', name='NONE',tags='') -> object:
+def raw_publish(ID, cookies: str, headers: dict = {}, thumbnail="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png", description='', name='NONE', tags='') -> object:
     """
     发布作品（推荐使用）
     ID:作品ID 该ID必须属于自己
@@ -95,15 +95,15 @@ def raw_publish(ID, cookies: str, headers: dict = {},thumbnail="https://static0.
     :return: 请求变量
     """
     if headers == {}:
-        headers = {'Cookie': cookies,
+        headers = {'Cookie': cookies, 
                    'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33"
                    }
 
 
     # print(ID)
     base = "https://code.xueersi.com/api/python/%s/publish"  # 作品id
-    data = {"projectId": str(ID), "name": name, "description": description, "created_source": "original",
-            "hidden_code": 2, "thumbnail": thumbnail,
+    data = {"projectId": str(ID), "name": name, "description": description, "created_source": "original", 
+            "hidden_code": 2, "thumbnail": thumbnail, 
             "tags": tags}
     res = requests.post(base % ID, headers=headers, data=data)
     return res
@@ -117,8 +117,8 @@ def cancel_publish(ID, cookies):
     """
 
     data = {'params': {'id': ID}}
-    headers = {'Cookie': cookies,
-               'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33",'cookie':cookies
+    headers = {'Cookie': cookies, 
+               'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33", 'cookie':cookies
                }
     res = requests.post("https://code.xueersi.com/api/python/" + str(ID) + "/cancel_publish", data=data, headers=headers)
     return res
@@ -150,12 +150,12 @@ def report(cookies: str, reason: str, reason_detail: int, complaint_reason_url: 
 
     """
     base = "https://code.xueersi.com/api/projects/submit_complaint"
-    data = {"reason": reason, "reason_detail": reason_detail, "complaint_reason_images": [],
+    data = {"reason": reasons "reason_detail": reason_detail, "complaint_reason_images": [], 
             "complaint_reason_url": complaint_reason_url, "id": ID}
 
     res = requests.post(base, headers={
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33',
-        'Cookie': cookies},
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 
+        'Cookie': cookies}, 
                         data=data)
     return res
 
@@ -190,7 +190,7 @@ def send_comment(Content: str, Cookie: str, Id_: int, UserAgent='', headers={}) 
         UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30"
 
     if headers == {}:
-        headers = {'Cookie': Cookie,
+        headers = {'Cookie': Cookie, 
                    'User-Agent': UserAgent
                    }
 
@@ -205,8 +205,8 @@ def send_comment(Content: str, Cookie: str, Id_: int, UserAgent='', headers={}) 
     else:
         raise ValueError('变量Type 包含意外的值:%s 应为1、2或3' % Type)
 
-    res = requests.post("https://code.xueersi.com/api/comments/submit",
-                        headers=headers,
+    res = requests.post("https://code.xueersi.com/api/comments/submit", 
+                        headers=headers, 
                         data={"appid": 1001108, 'topic_id': Type + str(Id_), 'target_id': '0', 'content': Content})
     return res
 
@@ -278,21 +278,21 @@ def process_works_info(Dict: dict) -> dict:
         return {'stat': '0', 'msg': Dict['msg']}
 
     _output = {
-        "name": Dict['data']['name'],
-        'type': Dict['data']['type'],
-        'description': Dict['data']['description'],
-        'xml': Dict['data']['xml'],
-        'user_id': Dict['data']['user_id'],
-        'thumbnail': Dict['data']['thumbnail'],
-        'modified_at': Dict['data']['modified_at'],
-        'likes': Dict['data']['likes'],
-        'views': Dict['data']['views'],
-        'comments': Dict['data']['comments'],
-        'deleted_at': Dict['data']['deleted_at'],
-        'created_at': Dict['data']['created_at'],
-        'updated_at': Dict['data']['updated_at'],
-        'topic_id': Dict['data']['topic_id'],
-        'manual_weight': Dict['data']['manual_weight'],
+        "name": Dict['data']['name'], 
+        'type': Dict['data']['type'], 
+        'description': Dict['data']['description'], 
+        'xml': Dict['data']['xml'], 
+        'user_id': Dict['data']['user_id'], 
+        'thumbnail': Dict['data']['thumbnail'], 
+        'modified_at': Dict['data']['modified_at'], 
+        'likes': Dict['data']['likes'], 
+        'views': Dict['data']['views'], 
+        'comments': Dict['data']['comments'], 
+        'deleted_at': Dict['data']['deleted_at'], 
+        'created_at': Dict['data']['created_at'], 
+        'updated_at': Dict['data']['updated_at'], 
+        'topic_id': Dict['data']['topic_id'], 
+        'manual_weight': Dict['data']['manual_weight'], 
         'popular_score': Dict['data']['popular_score']
     }
     return _output
@@ -320,7 +320,7 @@ def get_user_info(user_id, cookie='') -> dict:
     """
     headers = {
         'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33','cookie':cookie
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 'cookie':cookie
     }
     if cookie != '':
         _output = requests.get('https://code.xueersi.com/api/space/profile?user_id=%s' % user_id, headers=headers)
@@ -361,7 +361,7 @@ def get_msg_overview(cookie: str, headers={}) -> dict:
     :return: 返回值
 
     示例返回值：
-    {"stat":1,"status":1,"msg":"\u64cd\u4f5c\u6210\u529f","data":[{"category":1,"text":"\u8bc4\u8bba\u548c\u56de\u590d","count":0},{"category":2,"text":"\u70b9\u8d5e\u4e0e\u6536\u85cf","count":0},{"category":5,"text":"\u5173\u6ce8","count":0},{"category":3,"text":"\u53cd\u9988\u548c\u5ba1\u6838","count":0},{"category":4,"text":"\u7cfb\u7edf\u6d88\u606f","count":0}]}
+    {"stat":1, "status":1, "msg":"\u64cd\u4f5c\u6210\u529f", "data":[{"category":1, "text":"\u8bc4\u8bba\u548c\u56de\u590d", "count":0}, {"category":2, "text":"\u70b9\u8d5e\u4e0e\u6536\u85cf", "count":0}, {"category":5, "text":"\u5173\u6ce8", "count":0}, {"category":3, "text":"\u53cd\u9988\u548c\u5ba1\u6838", "count":0}, {"category":4, "text":"\u7cfb\u7edf\u6d88\u606f", "count":0}]}
     category 1 评论与回复
     category 2 点赞与收藏
     category 5 关注
@@ -375,7 +375,7 @@ def get_msg_overview(cookie: str, headers={}) -> dict:
     if headers == {}:
         headers = {
             'User-Agent':
-                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33',
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 
             'cookie':cookie
         }
     res = requests.get(base, headers=headers)
@@ -383,7 +383,7 @@ def get_msg_overview(cookie: str, headers={}) -> dict:
     return res
 
 
-def get_comments(ID,page=1) -> dict:
+def get_comments(ID, page=1) -> dict:
     """
     获取评论信息
     ID 作品ID
@@ -399,7 +399,7 @@ def get_comments(ID,page=1) -> dict:
     }
     base = "https://code.xueersi.com/api/comments?appid=1001108&topic_id=%s&parent_id=0&order_type=&page=%s&per_page=15"
     topic_id = process_works_info(get_works_info(ID))['topic_id']
-    res = requests.get(base % (topic_id,page), headers=headers)
+    res = requests.get(base % (topic_id, page), headers=headers)
     res = res.text.replace('null', '\'null\'').replace('false', 'False').replace('true', 'True')
     return eval(res)
 
@@ -488,12 +488,12 @@ def delete_comment(comment_id: int, ID: int, cookie: str) -> dict:
     """
     headers = {
         'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 
         'Cookie':cookie
     }
     data = {
-        'appid': 1001108,
-        'topic_id': process(get_info(ID)),
+        'appid': 1001108, 
+        'topic_id': process(get_info(ID)), 
         'id': comment_id
     }
     res = requests.post("https://code.xueersi.com/api/comments/delete", headers=headers, data=data)
@@ -511,7 +511,7 @@ def follow(follow_user_id: int, cookies: str) -> dict:
     data = {'followed_user_id': str(follow_user_id), 'state': 1}
     headers = {
         'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 
         'Cookie':cookies
     }
     res = requests.post('https://code.xueersi.com/api/space/follow', data=data, headers=headers)
@@ -529,7 +529,7 @@ def like(cookies: str, ID: int):
     data = {'params': {'id': ID, 'lang': 'code', 'form': get_works_info(ID)['data']['lang']}}
     headers = {
         'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 
         'Cookie':cookies
     }
     res = requests.post("https://code.xueersi.com/api/python/%s/like" % ID, headers=headers, data=data)
@@ -547,10 +547,10 @@ def unlike(cookies: str, ID: int):
     data = {'params': {'id': ID, 'lang': 'code', 'form': get_works_info(ID)['data']['lang']}}
     headers = {
         'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 
         'Cookie':cookies
     }
-    res = requests.post("https://code.xueersi.com/api/python/%s/unlike" % ID, headers=headers,
+    res = requests.post("https://code.xueersi.com/api/python/%s/unlike" % ID, headers=headers, 
                         data=data)
     return res
 
@@ -567,7 +567,7 @@ def edit_signature(cookies: str, word: str):
     data = {"signature": word}
     headers = {
         'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 
         'Cookie':cookies
     }
     res = requests.post(path, data=data, headers=headers)
