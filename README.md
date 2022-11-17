@@ -1,6 +1,6 @@
 <!-- html部分-开始 -->
 <div>
-    <link rel="shortcut icon" href="页面ico图标文件路径">
+    <link rel="shortcut icon" href="./favicon.ico">
 </div>
 <!-- html部分-结束 -->
 
