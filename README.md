@@ -1,6 +1,14 @@
 <!-- html部分-开始 -->
 <div>
-    <link rel="shortcut icon" href="./favicon.ico">
+    <script>
+(function() {
+    var link = document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = './favicon.ico';
+    document.getElementsByTagName('head')[0].appendChild(link);
+}());
+    </script>
 </div>
 <!-- html部分-结束 -->
 
